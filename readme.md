@@ -1,6 +1,6 @@
 # What is this?
 
-EZ-Express is a pick up and play REST API built with Express.js and designed to work with MongoDB and Cloudinary. It contains a secure registration system with fully developed authentication/authorization and email verification. Designed with a clean Router-Controller-Service architecture. Made to quickly get a project off the ground by 
+EZ-Express is a pick up and play REST API built with Express.js and designed to work with MongoDB and Cloudinary. It contains a secure registration system with fully developed authentication/authorization and email verification. Designed with a clean Router-Controller-Service architecture. Made to quickly get a project off the ground.
 
 <br>
 
