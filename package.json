@@ -4,6 +4,7 @@
   "description": "Express.js REST API with fully developed user registration system to serve as base for projects. Uses Router-Controller-Service architecture and MongoDB/Cloudinary for persistent data storage.",
   "main": "index.js",
   "scripts": {
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ibrahim P.G.",
