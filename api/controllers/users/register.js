@@ -10,16 +10,17 @@ module.exports = async (req, res) => {
     const { username, password, email } = req.body;
 
     if (!validateNewUser(username, password, email)[0]) {
-      return res.status(400).send(validateNewUser(username, password, email)[1]);
+      const validationErrMsg = validateNewUser(username, password, email)[1];
+      return res.status(400).json(validationErrMsg.toString());
     }
 
     const checkExistingUser = await database.findAll('users', 'username', username);
 
-    if (checkExistingUser.length > 0) return res.status(400).send('Username already exists.');
+    if (checkExistingUser.length > 0) return res.status(400).json('Username already exists.');
 
-    // const checkExistingEmail = await database.findAll('users', 'email', email);
+    const checkExistingEmail = await database.findAll('users', 'email', email);
 
-    // if (checkExistingEmail.length > 0) return res.status(400).send('Email already in use.');
+    if (checkExistingEmail.length > 0) return res.status(400).json('Email already in use.');
 
     const verificationCode = randomBytes(4).toString('hex');
 
@@ -35,7 +36,6 @@ module.exports = async (req, res) => {
 
     return res.sendStatus(201);
   } catch (err) {
-    console.log(err);
     return res.status(400).json(String(err.message));
   }
 };

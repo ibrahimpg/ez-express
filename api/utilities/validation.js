@@ -6,7 +6,7 @@ exports.validateNewUser = (username, password, email) => {
   if (username.length < 6) validationErrors.push('Username too short.');
   if (username.length > 16) validationErrors.push('Username too long.');
 
-  if (password.length < 6) validationErrors.push('Password too short.');
+  if (password.length < 8) validationErrors.push('Password too short.');
   if (password.length > 32) validationErrors.push('Password too long.');
 
   if (!/^\w+([.-]?\w)*@\w+([.-]?\w+)*(\.\w{2,7})+$/.test(email)) validationErrors.push('Invalid email address.');
@@ -30,7 +30,7 @@ exports.validateUsername = (username) => {
 exports.validatePassword = (password) => {
   const validationErrors = [];
 
-  if (password.length < 6) validationErrors.push('Password too short.');
+  if (password.length < 8) validationErrors.push('Password too short.');
   if (password.length > 32) validationErrors.push('Password too long.');
 
   if (validationErrors.length > 0) return [false, validationErrors];
