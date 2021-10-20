@@ -1,4 +1,4 @@
-exports.validateNewUser = (username, password, email) => {
+exports.validateNewUser = (username, password, email, companyName, companyDescription) => {
   const validationErrors = [];
 
   if (typeof username !== 'string') validationErrors.push('Username wrong data type.');
@@ -10,6 +10,9 @@ exports.validateNewUser = (username, password, email) => {
   if (password.length > 32) validationErrors.push('Password too long.');
 
   if (!/^\w+([.-]?\w)*@\w+([.-]?\w+)*(\.\w{2,7})+$/.test(email)) validationErrors.push('Invalid email address.');
+
+  if (companyName.length > 50 || typeof companyName !== 'string') validationErrors.push('Invalid company name.');
+  if (companyDescription.length > 125 || typeof companyDescription !== 'string') validationErrors.push('Invalid company description.');
 
   if (validationErrors.length > 0) return [false, validationErrors];
   return [true];

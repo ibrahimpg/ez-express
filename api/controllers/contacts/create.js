@@ -4,9 +4,9 @@ module.exports = async (req, res) => {
   try {
     const relatedUserId = req.tokenData.id;
 
-    const { firstName, lastName, phoneNumber, emailAddress, jobTitle } = req.body;
+    const { firstName, lastName, phoneNumber, emailAddress, jobTitle, companyName } = req.body;
 
-    const document = { relatedUserId, firstName, lastName, phoneNumber, emailAddress, jobTitle };
+    const document = { relatedUserId, firstName, lastName, phoneNumber, emailAddress, jobTitle, companyName };
 
     await database.insertOne('contacts', document);
 

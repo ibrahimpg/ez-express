@@ -7,11 +7,11 @@ const database = require('../../services/database');
 
 module.exports = async (req, res) => {
   try {
-    const { username, password, email } = req.body;
+    const { username, password, email, companyName, companyDescription } = req.body;
 
-    if (!validateNewUser(username, password, email)[0]) {
-      const validationErrMsg = validateNewUser(username, password, email)[1];
-      return res.status(400).json(validationErrMsg.toString());
+    if (!validateNewUser(username, password, email, companyName, companyDescription)[0]) {
+      const validationErrMsg = validateNewUser(username, password, email, companyName, companyDescription)[1];
+      return res.status(400).json(validationErrMsg.toString().replace(/.,/g, ', '));
     }
 
     const checkExistingUser = await database.findAll('users', 'username', username);
@@ -30,7 +30,18 @@ module.exports = async (req, res) => {
 
     const imgUrl = await uploadImage('./blank.png', `users/${username}`);
 
-    const data = { username, password: hashedPassword, salt, keylen, email, imgUrl, verificationCode, verified: false };
+    const data = {
+      username,
+      password: hashedPassword,
+      salt,
+      keylen,
+      email,
+      imgUrl,
+      verificationCode,
+      verified: false,
+      companyName,
+      companyDescription,
+    };
 
     await database.insertOne('users', data);
 

@@ -1,4 +1,4 @@
-const uploadImage = require('../../services/media');
+const { uploadImage } = require('../../services/media');
 const database = require('../../services/database');
 
 module.exports = async (req, res) => {
@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
     await database.updateOne('users', '_id', id, { imgUrl });
 
-    return res.status(200).send(imgUrl);
+    return res.status(200).json(imgUrl);
   } catch (err) {
     return res.status(400).json(String(err.message));
   }

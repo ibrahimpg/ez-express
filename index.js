@@ -1,9 +1,21 @@
 require('dotenv').config();
 const express = require('express');
+const { MongoClient } = require('mongodb');
 
 const app = express();
 
 const api = require('./api/routes');
+
+let db;
+
+MongoClient.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((cluster) => {
+    db = cluster.db('myFirstDatabase');
+    app.listen(process.env.PORT, () => { console.log(`listening at port ${process.env.PORT}...`); });
+  })
+  .catch((err) => console.log(err));
+
+exports.db = () => db;
 
 app.use(express.json());
 
@@ -15,5 +27,3 @@ app.use((req, res, next) => {
 });
 
 app.use('/api', api);
-
-app.listen(process.env.PORT, () => { console.log(`listening at port ${process.env.PORT}...`); });
