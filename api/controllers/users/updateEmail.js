@@ -9,11 +9,11 @@ module.exports = async (req, res) => {
 
     const { id, username } = req.tokenData;
 
-    if (!validateEmail(email)[0]) return res.status(400).send(validateEmail(email)[1]);
+    if (!validateEmail(email)[0]) return res.status(400).json(validateEmail(email)[1]);
 
-    // const checkExistingEmail = await database.findAll('users', 'email', email);
+    const checkExistingEmail = await database.findAll('users', 'email', email);
 
-    // if (checkExistingEmail.length > 0) return res.status(400).send('Email already in use.');
+    if (checkExistingEmail.length > 0) return res.status(400).json('Email already in use.');
 
     const verificationCode = randomBytes(4).toString('hex');
 

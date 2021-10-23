@@ -26,9 +26,9 @@ exports.sendVerificationEmail = async (email, username, verificationCode) => {
   await transporter.sendMail(message);
 };
 
-exports.sendRecoveryEmail = async (email, temporaryPassword) => {
-  const header = '<h1>Your password has been reset.</h1><br>';
-  const body = `<p>Use the following password to sign in to your account: ${temporaryPassword}`;
+exports.sendRecoveryEmail = async (email, username, temporaryPassword) => {
+  const header = `<h2>Your password has been reset for the following username: ${username}</h2>`;
+  const body = `<p>Use the following password to sign in to your account: ${temporaryPassword}<br>`;
   const footer = '<br>Once you have logged in, please change to a secure password.</p>';
 
   const message = {
