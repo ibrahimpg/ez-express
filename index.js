@@ -10,7 +10,7 @@ let db;
 
 MongoClient.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((cluster) => {
-    db = cluster.db('myFirstDatabase');
+    db = cluster.db('myDatabase');
     app.listen(process.env.PORT, () => { console.log(`listening at port ${process.env.PORT}...`); });
   })
   .catch((err) => console.log(err));
