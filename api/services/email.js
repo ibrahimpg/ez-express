@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 exports.sendVerificationEmail = async (email, username, verificationCode) => {
   const link = `${process.env.API_URL}/api/user/verify-email/${username}/${verificationCode}`;
   const header = '<h1>Verify your email:</h1>';
-  const body = `<p>Click on the link below in order to confirm your email address: ${link}</p>`;
+  const body = `<p>Click on the following link in order to confirm your email address: ${link}</p>`;
 
   const message = {
     to: email,
